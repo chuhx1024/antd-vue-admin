@@ -2,9 +2,12 @@ import Vue from 'vue'
 
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
+import { Button } from 'ant-design-vue'
+
 import App from './App.vue'
 import router from './router'
 import store from './store'
+Vue.use(Button)
 
 Vue.config.productionTip = false
 

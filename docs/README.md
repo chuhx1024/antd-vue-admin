@@ -29,3 +29,5 @@ Vue CLI v4.5.9
     import Vue from 'vue'
     import 'normalize.css/normalize.css' // A modern alternative to CSS resets
     ```
+## 项目引入 ant-design-vue
+- [ant-design-vue 官网](https://www.antdv.com/docs/vue/introduce-cn/)
