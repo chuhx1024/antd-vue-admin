@@ -15,8 +15,14 @@ const constantRoutes = [
                 component: () => import('@/views/dashboard'),
                 name: 'Dashboard',
             },
+            {
+                path: '404',
+                component: () => import('@/views/error-page/404'),
+                name: 'NotFound',
+            },
         ],
     },
+    { path: '*', redirect: '/404', hidden: true },
 ]
 
 const router = new VueRouter({
