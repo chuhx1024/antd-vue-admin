@@ -5,10 +5,12 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { Button, Layout, Icon } from 'ant-design-vue'
+import '@/styles/index.less'
+import { Button, Layout, Icon, Menu } from 'ant-design-vue'
 Vue.use(Button)
 Vue.use(Layout)
 Vue.use(Icon)
+Vue.use(Menu)
 
 Vue.config.productionTip = false
 
