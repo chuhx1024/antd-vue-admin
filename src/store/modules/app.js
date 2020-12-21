@@ -1,12 +1,10 @@
 const state = {
-    sidebar: {
-        opened: true,
-    },
+    sidebarCollapsed: false,
 }
 
 const mutations = {
     TOOGLE_SIDEBAR: state => {
-        state.sidebar.opend = !state.sidebar.opend
+        state.sidebarCollapsed = !state.sidebarCollapsed
     },
 }
 
