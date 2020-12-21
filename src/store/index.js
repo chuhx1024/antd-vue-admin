@@ -5,7 +5,7 @@ const modulesContext = require.context('./modules', false, /\.js$/)
 const modules = modulesContext.keys().reduce((modules, item) => {
     const key = item.replace(/\.\/(.*)\.js$/, '$1')
     const val = modulesContext(item)
-    modules[key] = val
+    modules[key] = val.default
     return modules
 }, {})
 
