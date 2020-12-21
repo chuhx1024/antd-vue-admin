@@ -5,13 +5,18 @@
         v-model="sidebarCollapsed"
         :trigger="null"
     >
+        <the-logo />
     </a-layout-sider>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import TheLogo from './components/TheLogo'
 export default {
     name: 'TheSidebar',
+    components: {
+        TheLogo,
+    },
     computed: {
         ...mapState('app', ['sidebarCollapsed']),
     },
