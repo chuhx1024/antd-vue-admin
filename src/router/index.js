@@ -16,6 +16,7 @@ const constantRoutes = [
                 component: () => import('@/views/dashboard'),
                 meta: {
                     title: '仪表盘',
+                    icon: '#icon-dashboard',
                 },
             },
         ],
@@ -25,6 +26,7 @@ const constantRoutes = [
         component: BasicLayout,
         meta: {
             title: 'Echarts',
+            icon: '#icon-echarts',
         },
         children: [
             {
@@ -33,6 +35,7 @@ const constantRoutes = [
                 component: () => import('@/views/echarts/LineDemo.vue'),
                 meta: {
                     title: '折线图',
+                    icon: '#icon-line',
                 },
             },
             {
@@ -41,6 +44,7 @@ const constantRoutes = [
                 component: () => import('@/views/echarts/PieDemo.vue'),
                 meta: {
                     title: '饼状图',
+                    icon: '#icon-pie',
                 },
             },
             {
@@ -50,6 +54,7 @@ const constantRoutes = [
                 component: () => import('@/views/echarts/bar-group'),
                 meta: {
                     title: '柱状图',
+                    icon: '#icon-barchart',
                 },
                 children: [
                     {
@@ -58,6 +63,7 @@ const constantRoutes = [
                         component: () => import('@/views/echarts/bar-group/BarFirst'),
                         meta: {
                             title: '柱状图1',
+                            icon: '#icon-bar',
                         },
                     },
                     {
@@ -66,6 +72,7 @@ const constantRoutes = [
                         component: () => import('@/views/echarts/bar-group/BarSecond'),
                         meta: {
                             title: '柱状图2',
+                            icon: '#icon-echarts',
                         },
                     },
                 ],
