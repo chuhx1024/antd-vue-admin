@@ -28,6 +28,7 @@ export default {
 
 <style lang='less' scoped>
    .LeftButton-container {
+       display: inline-block;
        font-size: 18px;
        width: 50px;
        text-align: center;

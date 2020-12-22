@@ -24,6 +24,7 @@ const constantRoutes = [
     {
         path: '/charts',
         component: BasicLayout,
+        redirect: '/charts/line',
         meta: {
             title: 'Echarts',
             icon: '#icon-echarts',

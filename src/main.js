@@ -8,11 +8,12 @@ import store from './store'
 import '@/styles/index.less'
 import '@/assets/iconfont/iconfont'
 import '@/assets/iconfont/icon.css'
-import { Button, Layout, Icon, Menu } from 'ant-design-vue'
+import { Button, Layout, Icon, Menu, Breadcrumb } from 'ant-design-vue'
 Vue.use(Button)
 Vue.use(Layout)
 Vue.use(Icon)
 Vue.use(Menu)
+Vue.use(Breadcrumb)
 
 Vue.config.productionTip = false
 

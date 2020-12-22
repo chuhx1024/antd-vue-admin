@@ -1,29 +1,28 @@
 <template>
-    <div class="SidebarMenu-container">
-        <a-menu
-            theme="dark"
-            mode="inline"
+    <a-menu
+        theme="dark"
+        :selected-keys="[activeMenu]"
+        mode="inline"
+    >
+        <template
+            v-for="item in routesArr"
         >
-            <template
-                v-for="item in routesArr"
-            >
-                <template v-if="item.children.length === 1">
-                    <a-menu-item :key="item.children[0].path">
-                        <app-link :to="item.children[0].path">
-                            <i class="anticon">
-                                <svg class="icon" aria-hidden="true">
-                                    <use :xlink:href="item.children[0].meta.icon"></use>
-                                </svg>
-                            </i>
-                            <span>{{item.children[0].meta.title}}</span>
-                        </app-link>
-                    </a-menu-item>
-                </template>
-                <sidebar-sub-menu v-else :key="item.path" :menu-info="item" :father-path="item.path"/>
+            <template v-if="item.children.length === 1">
+                <a-menu-item :key="item.children[0].path">
+                    <app-link :to="item.children[0].path">
+                        <i class="anticon">
+                            <svg class="icon" aria-hidden="true">
+                                <use :xlink:href="item.children[0].meta.icon"></use>
+                            </svg>
+                        </i>
+                        <span>{{item.children[0].meta.title}}</span>
+                    </app-link>
+                </a-menu-item>
             </template>
+            <sidebar-sub-menu v-else :key="item.path" :menu-info="item" :father-path="item.path"/>
+        </template>
 
-        </a-menu>
-    </div>
+    </a-menu>
 </template>
 
 <script>
@@ -39,14 +38,15 @@ export default {
             const { routes } = this.$router.options
             return routes.filter(item => item.hidden !== true)
         },
+        activeMenu () {
+            const route = this.$route
+            const { meta, path } = route
+            if (meta.activeMenu) {
+                return meta.activeMenu
+            }
+            return path
+        },
     },
 
 }
 </script>
-
-<style lang='less' scoped>
-   .SidebarMenu-container {
-
-   }
-
-</style>
