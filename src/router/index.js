@@ -7,6 +7,8 @@ Vue.use(VueRouter)
 const constantRoutes = [
     {
         path: '/login',
+        hidden: true,
+        name: 'Login',
         component: () => import('@/views/login'),
     },
     {
@@ -104,5 +106,4 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes: constantRoutes,
 })
-
 export default router

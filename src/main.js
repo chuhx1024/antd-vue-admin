@@ -4,11 +4,12 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import App from './App.vue'
 import router from './router'
+import './router/permission'
 import store from './store'
 import '@/styles/index.less'
 import '@/assets/iconfont/iconfont'
 import '@/assets/iconfont/icon.css'
-import { Button, Layout, Icon, Menu, Breadcrumb, Row, Col, FormModel, Input, Checkbox } from 'ant-design-vue'
+import { Button, Layout, Icon, Menu, Breadcrumb, Row, Col, FormModel, Input, Checkbox, message } from 'ant-design-vue'
 Vue.use(Button)
 Vue.use(Layout)
 Vue.use(Icon)
@@ -19,6 +20,7 @@ Vue.use(Col)
 Vue.use(FormModel)
 Vue.use(Input)
 Vue.use(Checkbox)
+Vue.prototype.$message = message
 
 Vue.config.productionTip = false
 

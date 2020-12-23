@@ -45,6 +45,7 @@
 </template>
 <script>
 import { login } from '@/api/user'
+import { setToken } from '@/utils/handleCookie'
 export default {
     name: 'Login',
     data () {
@@ -67,8 +68,15 @@ export default {
         login () {
             this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
-                    const res = await login(this.ruleForm)
-                    console.log(res)
+                    const { data } = await login(this.ruleForm)
+                    const { status } = data
+                    if (!status) {
+                        this.$message.success('登录成功 欢迎')
+                        setToken(data.token)
+                        this.$router.push('/')
+                    } else {
+                        this.$message.error(data.msg)
+                    }
                 }
             })
         },
