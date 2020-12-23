@@ -44,6 +44,7 @@
     </section>
 </template>
 <script>
+import { login } from '@/api/user'
 export default {
     name: 'Login',
     data () {
@@ -64,9 +65,10 @@ export default {
             e.keyCode == 13 && this.login()
         },
         login () {
-            this.$refs.ruleForm.validate(valid => {
+            this.$refs.ruleForm.validate(async valid => {
                 if (valid) {
-                    alert(1)
+                    const res = await login(this.ruleForm)
+                    console.log(res)
                 }
             })
         },
