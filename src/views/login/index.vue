@@ -72,7 +72,7 @@ export default {
                     const { status } = data
                     if (!status) {
                         this.$message.success('登录成功 欢迎')
-                        setToken(data.token)
+                        setToken(data.data.token)
                         this.$router.push('/')
                     } else {
                         this.$message.error(data.msg)
