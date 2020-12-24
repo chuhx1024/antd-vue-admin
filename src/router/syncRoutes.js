@@ -12,7 +12,7 @@ const asyncRoutes = [
             {
                 path: '/user/customers',
                 name: 'Customers',
-                component: () => import('@/views/echarts/LineDemo.vue'),
+                component: () => import('@/views/user/customers'),
                 meta: {
                     title: '用户管理',
                     icon: '#icon-line',
@@ -21,7 +21,7 @@ const asyncRoutes = [
             {
                 path: '/user/roles',
                 name: 'Roles',
-                component: () => import('@/views/echarts/PieDemo.vue'),
+                component: () => import('@/views/user/roles'),
                 meta: {
                     title: '角色管理',
                     icon: '#icon-pie',

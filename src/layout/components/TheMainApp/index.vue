@@ -1,5 +1,5 @@
 <template>
-    <a-layout-content>
+    <a-layout-content class="app-main">
         <slot />
     </a-layout-content>
 </template>
@@ -9,3 +9,8 @@ export default {
     name: 'TheMainApp',
 }
 </script>
+<style lang="less" scoped>
+    .app-main {
+        padding: 10px;
+    }
+</style>
