@@ -8,3 +8,12 @@ export const login = (data) => {
         data,
     })
 }
+
+// 根据 token 获取 用户信息
+export const getInfo = (token) => {
+    return request({
+        url: '/user/info',
+        method: 'get',
+        params: { token },
+    })
+}

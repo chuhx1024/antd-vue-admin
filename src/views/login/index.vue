@@ -44,7 +44,7 @@
     </section>
 </template>
 <script>
-import { login } from '@/api/user'
+import { login, getInfo } from '@/api/user'
 import { setToken } from '@/utils/handleCookie'
 export default {
     name: 'Login',
@@ -73,6 +73,7 @@ export default {
                     if (!status) {
                         this.$message.success('登录成功 欢迎')
                         setToken(data.data.token)
+                        getInfo(data.data.token)
                         this.$router.push('/')
                     } else {
                         this.$message.error(data.msg)
