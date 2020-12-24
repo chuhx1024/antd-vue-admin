@@ -36,7 +36,7 @@ export default {
     computed: {
         routesArr () {
             const { routes } = this.$router.options
-            return routes.filter(item => item.hidden !== true)
+            return this.forFilter(routes)
         },
         activeMenu () {
             const route = this.$route
@@ -45,6 +45,17 @@ export default {
                 return meta.activeMenu
             }
             return path
+        },
+    },
+    methods: {
+        // 递归过滤 路由上的 hidden: true
+        forFilter (router) {
+            return router.filter(item => {
+                if (item.children) {
+                    item.children = this.forFilter(item.children)
+                }
+                return item.hidden !== true
+            })
         },
     },
 
