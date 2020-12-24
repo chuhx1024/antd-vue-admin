@@ -18,12 +18,11 @@
             <a-table
                 :columns="columns"
                 :data-source="rolesList"
+                rowKey="roleName"
             >
             </a-table>
         </section>
-        <a-modal v-model="visible" title="添加角色">
-            <roles-form></roles-form>
-        </a-modal>
+        <roles-form v-model="visible"></roles-form>
     </div>
 </template>
 
