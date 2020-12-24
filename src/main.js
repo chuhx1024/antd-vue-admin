@@ -4,7 +4,6 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import App from './App.vue'
 import router from './router'
-import './router/permission'
 import store from './store'
 import '@/styles/index.less'
 import '@/assets/iconfont/iconfont'
