@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 import { getToken } from '@/utils/handleCookie'
 import constantRoutes from './constantRoutes'
 import syncRoutes from './syncRoutes'
 
 Vue.use(VueRouter)
+
+Nprogress.configure({ showSpinner: false })
 
 const router = new VueRouter({
     mode: 'history',
@@ -13,6 +17,7 @@ const router = new VueRouter({
 })
 let hasRoles = ''
 router.beforeEach((to, from, next) => {
+    Nprogress.start()
     const token = getToken()
 
     if (token) {
@@ -35,5 +40,6 @@ router.beforeEach((to, from, next) => {
             next({ name: 'Login' })
         }
     }
+    Nprogress.done()
 })
 export default router
