@@ -3,13 +3,15 @@
         <section class="page-header">
             <a-button
                 type="primary"
-                @click="showModal"
+                @click="showModal(0)"
             >
                 创建角色
             </a-button>
             <a-button
                 style="margin-left: 10px;"
                 type="primary"
+                :disabled="!roleInfo._id"
+                @click="showModal(1)"
             >
                 设置角色权限
             </a-button>
@@ -18,16 +20,23 @@
             <a-table
                 :columns="columns"
                 :data-source="rolesList"
-                rowKey="roleName"
+                row-key="roleName"
+                :row-selection="{
+                    type: 'radio',
+                    onSelect
+                }"
             >
             </a-table>
         </section>
-        <roles-form :visible.sync="visible"></roles-form>
+        <roles-form :visible.sync="visible[0]"></roles-form>
+        <auth-tree :role-info="roleInfo" :visible.sync="visible[1]"></auth-tree>
     </div>
 </template>
 
 <script>
 import RolesForm from './RolesForm'
+import AuthTree from './AuthTree'
+import { roleList } from '@/api/user'
 const columns = [
     {
         title: '角色名称',
@@ -54,6 +63,7 @@ export default {
     name: 'Roles',
     components: {
         RolesForm,
+        AuthTree,
     },
     data () {
         return {
@@ -64,13 +74,25 @@ export default {
                     createTime: '123@126.com',
                 },
             ],
-            visible: false,
+            visible: [false, false],
+            roleInfo: {},
         }
     },
     methods: {
-        showModal () {
-            this.visible = true
+        showModal (index) {
+            this.$set(this.visible, index, true)
         },
+        async getList () {
+            const { data: { data } } = await roleList()
+            console.log(data, 9090)
+            this.rolesList = data
+        },
+        onSelect (row) {
+            this.roleInfo = row
+        },
+    },
+    created () {
+        this.getList()
     },
 
 }

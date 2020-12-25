@@ -19,11 +19,17 @@ export const getInfo = (token) => {
 }
 
 // 添加角色
-
 export const addRole = (data) => {
     return request({
         url: 'user/role/add',
         method: 'post',
         data,
+    })
+}
+// 获取角色列表
+export const roleList = () => {
+    return request({
+        url: 'user/role/list',
+        method: 'get',
     })
 }
