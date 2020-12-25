@@ -12,6 +12,7 @@
             <a-table
                 :columns="columns"
                 :data-source="userList"
+                rowKey='username'
             >
                 <span slot="action" slot-scope="record">
                     <a-button type="link" @click="showModal(record)">修改</a-button>
@@ -20,9 +21,10 @@
                 </span>
             </a-table>
         </section>
-        <a-modal v-model="visible" :title="userInfo ? '修改' : '添加'">
-            <customer-form :userInfo="userInfo"></customer-form>
-        </a-modal>
+        <customer-form
+            :userInfo="userInfo"
+            v-model="visible"
+        ></customer-form>
     </div>
 </template>
 
@@ -47,7 +49,7 @@ const columns = [
     {
         title: '创建时间',
         dataIndex: 'create_time',
-        key: 'phone',
+        key: 'create_time',
     },
     {
         title: '所属角色',
