@@ -17,3 +17,13 @@ export const getInfo = (token) => {
         params: { token },
     })
 }
+
+// 添加角色
+
+export const addRole = (data) => {
+    return request({
+        url: 'user/role/add',
+        method: 'post',
+        data,
+    })
+}

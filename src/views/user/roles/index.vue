@@ -22,7 +22,7 @@
             >
             </a-table>
         </section>
-        <roles-form v-model="visible"></roles-form>
+        <roles-form :visible.sync="visible"></roles-form>
     </div>
 </template>
 
