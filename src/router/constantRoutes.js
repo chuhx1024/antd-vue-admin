@@ -10,6 +10,10 @@ const constantRoutes = [
         path: '/',
         component: BasicLayout,
         redirect: '/dashboard',
+        meta: {
+            title: '仪表盘',
+            icon: '#icon-dashboard',
+        },
         children: [
             {
                 path: '/dashboard',

@@ -15,6 +15,7 @@
         <a-tree
             v-model="checkedKeys"
             checkable
+            defaultExpandAll
             :tree-data="treeData"
         />
 
@@ -23,49 +24,6 @@
 
 <script>
 import { addRole } from '@/api/user'
-const treeData = [
-    {
-        title: '0-0',
-        key: '0-0',
-        children: [
-            {
-                title: '0-0-0',
-                key: '0-0-0',
-                children: [
-                    { title: '0-0-0-0', key: '0-0-0-0' },
-                    { title: '0-0-0-1', key: '0-0-0-1' },
-                    { title: '0-0-0-2', key: '0-0-0-2' },
-                ],
-            },
-            {
-                title: '0-0-1',
-                key: '0-0-1',
-                children: [
-                    { title: '0-0-1-0', key: '0-0-1-0' },
-                    { title: '0-0-1-1', key: '0-0-1-1' },
-                    { title: '0-0-1-2', key: '0-0-1-2' },
-                ],
-            },
-            {
-                title: '0-0-2',
-                key: '0-0-2',
-            },
-        ],
-    },
-    {
-        title: '0-1',
-        key: '0-1',
-        children: [
-            { title: '0-1-0-0', key: '0-1-0-0' },
-            { title: '0-1-0-1', key: '0-1-0-1' },
-            { title: '0-1-0-2', key: '0-1-0-2' },
-        ],
-    },
-    {
-        title: '0-2',
-        key: '0-2',
-    },
-]
 export default {
     name: 'AuthTree',
     props: {
@@ -77,9 +35,21 @@ export default {
     },
     data () {
         return {
-            treeData,
-            checkedKeys: ['0-0-0'],
+            checkedKeys: [],
         }
+    },
+    computed: {
+        routesArr () {
+            const { routes } = this.$router.options
+            return this.forFilter(routes)
+        },
+        treeData () {
+            return [{
+                title: '平台权限',
+                key: 'all',
+                children: this.forTreeItem(this.routesArr),
+            }]
+        },
     },
     methods: {
         closeModal () {
@@ -87,6 +57,28 @@ export default {
         },
         addRole () {
             addRole(this.form)
+        },
+        // 递归过滤 路由上的 hidden: true
+        forFilter (router) {
+            return router.filter(item => {
+                if (item.children) {
+                    item.children = this.forFilter(item.children)
+                }
+                return item.hidden !== true
+            })
+        },
+        // 递归整理树结构
+        forTreeItem (data) {
+            return data.map(item => {
+                const temp = {
+                    title: item.meta.title,
+                    key: item.path,
+                }
+                if (item.children && item.children.length !== 1) {
+                    temp.children = this.forTreeItem(item.children)
+                }
+                return temp
+            })
         },
     },
 
