@@ -37,6 +37,7 @@
 import RolesForm from './RolesForm'
 import AuthTree from './AuthTree'
 import { roleList } from '@/api/user'
+import { formateDate } from '@/utils/dateUtils'
 const columns = [
     {
         title: '角色名称',
@@ -46,11 +47,13 @@ const columns = [
     {
         title: '创建时间',
         dataIndex: 'createTime',
+        customRender: item => formateDate(item),
         key: 'createTime',
     },
     {
         title: '授权时间',
         dataIndex: 'authTime',
+        customRender: item => formateDate(item),
         key: 'authTime',
     },
     {

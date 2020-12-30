@@ -3,7 +3,7 @@
         :visible="visible"
         title="设置角色权限"
         @cancel="closeModal"
-        @ok="addRole"
+        @ok="updateRole"
     >
         <a-form-model-item
             label="角色名称"
@@ -13,7 +13,7 @@
             <a-input v-model="roleInfo.roleName" disabled/>
         </a-form-model-item>
         <a-tree
-            v-model="checkedKeys"
+            v-model="roleInfo.menus"
             checkable
             defaultExpandAll
             :tree-data="treeData"
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { addRole } from '@/api/user'
+import { roleUpdate } from '@/api/user'
 import { mapState } from 'vuex'
 export default {
     name: 'AuthTree',
@@ -53,8 +53,8 @@ export default {
         closeModal () {
             this.$emit('update:visible', false)
         },
-        addRole () {
-            addRole(this.form)
+        updateRole () {
+            roleUpdate(this.roleInfo)
         },
         // 递归整理树结构
         forTreeItem (data) {

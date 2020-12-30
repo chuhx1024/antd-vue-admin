@@ -33,3 +33,13 @@ export const roleList = () => {
         method: 'get',
     })
 }
+
+// 跟新角色(设置权限)
+
+export const roleUpdate = (data) => {
+    return request({
+        url: 'user/role/update',
+        method: 'post',
+        data,
+    })
+}
