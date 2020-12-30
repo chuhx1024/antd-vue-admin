@@ -30,6 +30,7 @@
 
 <script>
 import CustomerForm from './CustomerFom'
+import { userList } from '@/api/user'
 const columns = [
     {
         title: '用户名',
@@ -86,6 +87,14 @@ export default {
             this.userInfo = record && { ...record }
             this.visible = true
         },
+        async getList () {
+            const { data: { data } } = await userList()
+            console.log(data, 90)
+            this.userList = data
+        },
+    },
+    created () {
+        this.getList()
     },
 
 }

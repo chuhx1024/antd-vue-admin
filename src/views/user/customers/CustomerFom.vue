@@ -3,6 +3,7 @@
         :title="userInfo ? '修改' : '添加'"
         :visible='value'
         @cancel="closeModal"
+        @ok="addUserhandler"
     >
         <a-form-model
             class="customerFom-container"
@@ -12,13 +13,23 @@
             <a-form-model-item label="用户名">
                 <a-input v-model="form.username" />
             </a-form-model-item>
+            <a-form-model-item label="密码">
+                <a-input v-model="form.password" />
+            </a-form-model-item>
             <a-form-model-item label="电话">
-                <a-select v-model="form.phone" placeholder="please select your zone">
-                    <a-select-option value="shanghai">
-                        Zone one
-                    </a-select-option>
-                    <a-select-option value="beijing">
-                        Zone two
+                <a-input v-model="form.phone" />
+            </a-form-model-item>
+            <a-form-model-item label="邮箱">
+                <a-input v-model="form.email" />
+            </a-form-model-item>
+            <a-form-model-item label="角色">
+                <a-select v-model="form.roleId" placeholder="please select your role">
+                    <a-select-option
+                        v-for="item in rolesList"
+                        :key="item._id"
+                        :value="item._id"
+                    >
+                        {{item.roleName}}
                     </a-select-option>
                 </a-select>
             </a-form-model-item>
@@ -27,6 +38,7 @@
 </template>
 
 <script>
+import { addUser, roleList } from '@/api/user'
 export default {
     name: 'customerFom',
     props: {
@@ -38,9 +50,13 @@ export default {
     },
     data () {
         return {
+            rolesList: [],
             form: {
                 username: '',
+                password: '',
                 phone: '',
+                email: '',
+                roleId: '',
             },
         }
     },
@@ -50,9 +66,20 @@ export default {
         },
     },
     methods: {
+        addUserhandler () {
+            addUser()
+        },
+        async getRolesList () {
+            const { data: { data } } = await roleList()
+            console.log(data, 9090)
+            this.rolesList = data
+        },
         closeModal () {
             this.$emit('input', false)
         },
+    },
+    created () {
+        this.getRolesList()
     },
 
 }

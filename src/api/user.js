@@ -35,10 +35,26 @@ export const roleList = () => {
 }
 
 // 跟新角色(设置权限)
-
 export const roleUpdate = (data) => {
     return request({
         url: 'user/role/update',
+        method: 'post',
+        data,
+    })
+}
+
+// 获取用户列表
+export const userList = () => {
+    return request({
+        url: 'user/list',
+        method: 'get',
+    })
+}
+
+// 添加用户
+export const addUser = (data) => {
+    return request({
+        url: 'user/add',
         method: 'post',
         data,
     })
