@@ -24,6 +24,7 @@
 
 <script>
 import { addRole } from '@/api/user'
+import { mapState } from 'vuex'
 export default {
     name: 'AuthTree',
     props: {
@@ -39,15 +40,12 @@ export default {
         }
     },
     computed: {
-        routesArr () {
-            const { routes } = this.$router.options
-            return this.forFilter(routes)
-        },
+        ...mapState('routers', ['allSideBar']),
         treeData () {
             return [{
                 title: '平台权限',
                 key: 'all',
-                children: this.forTreeItem(this.routesArr),
+                children: this.forTreeItem(this.allSideBar),
             }]
         },
     },
@@ -57,15 +55,6 @@ export default {
         },
         addRole () {
             addRole(this.form)
-        },
-        // 递归过滤 路由上的 hidden: true
-        forFilter (router) {
-            return router.filter(item => {
-                if (item.children) {
-                    item.children = this.forFilter(item.children)
-                }
-                return item.hidden !== true
-            })
         },
         // 递归整理树结构
         forTreeItem (data) {

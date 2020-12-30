@@ -5,7 +5,7 @@
         mode="inline"
     >
         <template
-            v-for="item in routesArr"
+            v-for="item in allSideBar"
         >
             <template v-if="item.children.length === 1">
                 <a-menu-item :key="item.children[0].path">
@@ -28,16 +28,13 @@
 <script>
 import AppLink from './AppLink'
 import SidebarSubMenu from './SidebarSubMenu'
+import { mapState } from 'vuex'
 export default {
     name: 'SidebarMenu',
     components: {
         AppLink, SidebarSubMenu,
     },
     computed: {
-        routesArr () {
-            const { routes } = this.$router.options
-            return this.forFilter(routes)
-        },
         activeMenu () {
             const route = this.$route
             const { meta, path } = route
@@ -46,18 +43,7 @@ export default {
             }
             return path
         },
+        ...mapState('routers', ['allSideBar']),
     },
-    methods: {
-        // 递归过滤 路由上的 hidden: true
-        forFilter (router) {
-            return router.filter(item => {
-                if (item.children) {
-                    item.children = this.forFilter(item.children)
-                }
-                return item.hidden !== true
-            })
-        },
-    },
-
 }
 </script>
