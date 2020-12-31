@@ -59,3 +59,12 @@ export const addUser = (data) => {
         data,
     })
 }
+
+// 删除用户
+export const delUser = (data) => {
+    return request({
+        url: 'user/del',
+        method: 'post',
+        data,
+    })
+}

@@ -67,7 +67,7 @@ export default {
     },
     methods: {
         addUserhandler () {
-            addUser()
+            addUser(this.form)
         },
         async getRolesList () {
             const { data: { data } } = await roleList()

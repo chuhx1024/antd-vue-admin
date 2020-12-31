@@ -17,7 +17,7 @@
                 <span slot="action" slot-scope="record">
                     <a-button type="link" @click="showModal(record)">修改</a-button>
                     <a-divider type="vertical" />
-                    <a-button type="link">删除</a-button>
+                    <a-button type="link" @click="delUserHandler(record._id)">删除</a-button>
                 </span>
             </a-table>
         </section>
@@ -30,7 +30,8 @@
 
 <script>
 import CustomerForm from './CustomerFom'
-import { userList } from '@/api/user'
+import { userList, delUser } from '@/api/user'
+import { formateDate } from '@/utils/dateUtils'
 const columns = [
     {
         title: '用户名',
@@ -49,13 +50,15 @@ const columns = [
     },
     {
         title: '创建时间',
-        dataIndex: 'create_time',
-        key: 'create_time',
+        dataIndex: 'createTime',
+        customRender: item => formateDate(item),
+        key: 'createTime',
     },
     {
         title: '所属角色',
-        dataIndex: 'role',
-        key: 'role',
+        dataIndex: 'roleId',
+        customRender: item => rolesName[item],
+        key: 'roleId',
     },
     {
         title: '操作',
@@ -63,6 +66,7 @@ const columns = [
         scopedSlots: { customRender: 'action' },
     },
 ]
+const rolesName = {}
 export default {
     name: 'customers',
     components: {
@@ -87,10 +91,19 @@ export default {
             this.userInfo = record && { ...record }
             this.visible = true
         },
+
         async getList () {
-            const { data: { data } } = await userList()
-            console.log(data, 90)
-            this.userList = data
+            const { data: { data: { users, roles } } } = await userList()
+            this.userList = users
+            roles.forEach(item => {
+                rolesName[item._id] = item.roleName
+            })
+        },
+
+        // 删除用户
+        async delUserHandler (userId) {
+            const result = await delUser({ userId })
+            console.log(result)
         },
     },
     created () {
