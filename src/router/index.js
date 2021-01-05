@@ -5,6 +5,7 @@ import 'nprogress/nprogress.css'
 import { getToken } from '@/utils/handleCookie'
 import constantRoutes from './constantRoutes'
 import syncRoutes from './syncRoutes'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -16,7 +17,7 @@ const router = new VueRouter({
     routes: constantRoutes,
 })
 let hasRoles = ''
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
     Nprogress.start()
     const token = getToken()
 
@@ -28,6 +29,7 @@ router.beforeEach((to, from, next) => {
                 next()
             } else {
                 hasRoles = 123
+                store.dispatch('user/getUserInfo', token)
                 router.addRoutes(syncRoutes)
                 router.options.routes = [...constantRoutes, ...syncRoutes]
                 next({ ...to, replace: true })
