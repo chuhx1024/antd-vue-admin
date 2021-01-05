@@ -2,6 +2,7 @@
     <a-layout-header class="the-navbar-container">
         <left-button></left-button>
         <bread-crumb></bread-crumb>
+        <right-menu />
     </a-layout-header>
 </template>
 
@@ -9,10 +10,11 @@
 
 import LeftButton from './components/LeftButton'
 import BreadCrumb from './components/BreadCrumb'
+import RightMenu from './components/RightMenu'
 export default {
     name: 'TheNavbarr',
     components: {
-        LeftButton, BreadCrumb,
+        LeftButton, BreadCrumb, RightMenu,
     },
 
 }

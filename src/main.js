@@ -11,7 +11,7 @@ import '@/assets/iconfont/icon.css'
 import {
     Button, Layout, Icon, Menu, Breadcrumb, Row, Col,
     FormModel, Input, Checkbox, message, Table, Divider,
-    Modal, Select, Tree,
+    Modal, Select, Tree, Dropdown,
 } from 'ant-design-vue'
 Vue.use(Button)
 Vue.use(Layout)
@@ -28,6 +28,7 @@ Vue.use(Divider)
 Vue.use(Modal)
 Vue.use(Select)
 Vue.use(Tree)
+Vue.use(Dropdown)
 Vue.prototype.$message = message
 
 Vue.config.productionTip = false
