@@ -27,6 +27,26 @@ const constantRoutes = [
         ],
     },
     {
+        path: '/protobuf',
+        component: BasicLayout,
+        redirect: '/protobuf',
+        meta: {
+            title: 'WS-Protobuf',
+            icon: '#icon-dashboard',
+        },
+        children: [
+            {
+                path: '/protobuf',
+                name: 'Protobuf',
+                component: () => import('@/views/protobuf'),
+                meta: {
+                    title: 'WS-Protobuf',
+                    icon: '#icon-dashboard',
+                },
+            },
+        ],
+    },
+    {
         path: '/charts',
         component: BasicLayout,
         redirect: '/charts/line',

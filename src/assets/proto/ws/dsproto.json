@@ -1,0 +1,48 @@
+{
+  "options": {
+    "go_package": "finlab.ccbft.com/ppc/audit/progress",
+    "java_multiple_files": true,
+    "java_package": "com.ccbft.finlab.ppc.progress.protos",
+    "java_outer_classname": "AuditProgress"
+  },
+  "nested": {
+    "protos": {
+      "nested": {
+        "AuditProgress": {
+          "fields": {
+            "component": {
+              "type": "Component",
+              "id": 1
+            },
+            "lastSequence": {
+              "type": "string",
+              "id": 2
+            },
+            "totalSequence": {
+              "type": "string",
+              "id": 3
+            },
+            "logs": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 4
+            }
+          },
+          "nested": {
+            "Component": {
+              "values": {
+                "PENGDING": 0,
+                "AUDITTING_DATASET": 1,
+                "AUDITTING_PSI": 2,
+                "AUDITTING_TRAIN": 3,
+                "TREATED": 4,
+                "COMPLETED": 5,
+                "TERMINATED": 6
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

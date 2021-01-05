@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "finlab.ccbft.com/ppc/audit/progress";
+option java_multiple_files = true;
+option java_package = "com.ccbft.finlab.ppc.progress.protos";
+option java_outer_classname = "AuditProgress";
+
+package protos;
+
+message AuditProgress {
+  enum Component {
+    PENGDING              = 0;
+    AUDITTING_DATASET     = 1;  
+    AUDITTING_PSI        = 2;  
+    AUDITTING_TRAIN      = 3;  
+    TREATED               = 4;  
+    COMPLETED             = 5;
+    TERMINATED            = 6;  //Cancelled by user
+  }
+  Component    component    = 1;
+  string    lastSequence    = 2;
+  string    totalSequence   = 3;
+  // List
+  repeated string logs    = 4;
+}

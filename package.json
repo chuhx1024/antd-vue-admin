@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "protows": "pbjs -t json src/assets/proto/ws/dsproto.proto -o src/assets/proto/ws/dsproto.json"
   },
   "dependencies": {
     "ant-design-vue": "^1.7.2",
@@ -14,6 +15,7 @@
     "js-cookie": "^2.2.1",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
+    "protobufjs": "^6.10.2",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
