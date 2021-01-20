@@ -1,5 +1,6 @@
 import constantRoutes from '@/router//constantRoutes'
 import syncRoutes from '@/router/syncRoutes'
+import { getRoleMenuById } from '@/api/user'
 
 const forFilter = (router) => {
     return router.filter(item => {
@@ -12,6 +13,20 @@ const forFilter = (router) => {
 // 递归过滤掉 hidden: true 的路由项
 const getAllSidebar = () => {
     return forFilter([...constantRoutes, ...syncRoutes])
+}
+
+// 根据权限菜单 获取 可添加的同态路由
+
+const forFilterPerssion = (router, menus) => {
+    return router.filter(item => {
+        if (item.children) {
+            item.children = forFilterPerssion(item.children, menus)
+            if (forFilterPerssion.length !== 0) {
+                return true
+            }
+        }
+        return menus.includes(item.path)
+    })
 }
 
 const state = {
@@ -30,7 +45,12 @@ const mutations = {
 }
 
 const actions = {
-    // setAllRoutes: ({commit}, )
+    async setPermisssRoutes ({ commit }, roleId) {
+        const { data: { data: { menus } } } = await getRoleMenuById(roleId)
+        const router = forFilterPerssion(syncRoutes, menus)
+        commit('SET_PERMISSROUTES', router)
+        return router
+    },
 }
 
 export default {

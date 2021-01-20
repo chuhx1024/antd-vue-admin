@@ -16,7 +16,6 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes: constantRoutes,
 })
-let hasRoles = ''
 router.beforeEach(async (to, from, next) => {
     Nprogress.start()
     const token = getToken()
@@ -25,14 +24,24 @@ router.beforeEach(async (to, from, next) => {
         if (to.path === '/login') {
             next('/')
         } else {
+            const hasRoles = store.state.user.roleId
             if (hasRoles) {
                 next()
             } else {
-                hasRoles = 123
-                store.dispatch('user/getUserInfo', token)
-                router.addRoutes(syncRoutes)
-                router.options.routes = [...constantRoutes, ...syncRoutes]
-                next({ ...to, replace: true })
+                // 一定要用异步 否则 hasRoles 获取不到数据
+                const { roleId } = await store.dispatch('user/getUserInfo', token)
+
+                if (roleId === 'admin') {
+                    router.addRoutes(syncRoutes)
+                    router.options.routes = [...constantRoutes, ...syncRoutes]
+                    next({ ...to, replace: true })
+                } else {
+                    const filrterRouter = await store.dispatch('routers/setPermisssRoutes', roleId)
+                    console.log(filrterRouter, 110)
+                    router.addRoutes(filrterRouter)
+                    router.options.routes = [...constantRoutes, ...filrterRouter]
+                    next({ ...to, replace: true })
+                }
             }
         }
     } else {

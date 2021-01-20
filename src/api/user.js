@@ -43,6 +43,15 @@ export const roleUpdate = (data) => {
     })
 }
 
+// 根据角色 id 获取权限菜单
+export const getRoleMenuById = (id) => {
+    return request({
+        url: 'user/role/oneInfo',
+        method: 'get',
+        params: { id },
+    })
+}
+
 // 获取用户列表
 export const userList = () => {
     return request({

@@ -31,12 +31,16 @@ const mutations = {
 }
 
 const actions = {
-    async getUserInfo ({ commit, state }) {
-        const { data } = await getInfo(state.token)
-        const { username, createTime, roleId } = data.data.user
-        commit('SET_USERNAME', username)
-        commit('SET_CREATETIME', createTime)
-        commit('SET_ROLEID', roleId)
+    getUserInfo ({ commit, state }) {
+        return new Promise((resolve, reject) => {
+            getInfo(state.token).then((res) => {
+                const { username, createTime, roleId } = res.data.data.user
+                commit('SET_USERNAME', username)
+                commit('SET_CREATETIME', createTime)
+                commit('SET_ROLEID', roleId)
+                resolve(res.data.data.user)
+            })
+        })
     },
     setToken ({ commit }, token) {
         commit('SET_TOKEN', token)
