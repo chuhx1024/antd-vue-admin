@@ -88,6 +88,26 @@ const asyncRoutes = [
             },
         ],
     },
+    {
+        path: '/css3D',
+        component: BasicLayout,
+        redirect: '/css3D',
+        meta: {
+            title: 'CSS-3D',
+            icon: '#icon-dashboard',
+        },
+        children: [
+            {
+                path: '/css3D',
+                name: 'CSS-3D',
+                component: () => import('@/views/css3D'),
+                meta: {
+                    title: 'CSS-3D',
+                    icon: '#icon-dashboard',
+                },
+            },
+        ],
+    },
 ]
 
 export default asyncRoutes
