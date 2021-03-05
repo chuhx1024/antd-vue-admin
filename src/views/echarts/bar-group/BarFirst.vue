@@ -1,6 +1,6 @@
 <template>
     <div class="BarFirst-container common-page">
-        <div ref="myChart" :style="{width: '300px', height: '300px'}"></div>
+        <div ref="myChart" :style="{width: '1000px', height: '600px'}"></div>
     </div>
 </template>
 
@@ -21,6 +21,37 @@ export default {
         // 初始化 echertInstance 对象
         initChart () {
             this.chartInstance = this.$echarts.init(this.$refs.myChart)
+            const initOption = { // 不包含数据的配置项
+                title: { text: '在Vue中使用echarts' },
+                tooltip: {},
+                xAxis: {
+                    type: 'value',
+                },
+                yAxis: {
+                    type: 'category',
+                },
+                series: [{
+                    name: '销量',
+                    type: 'bar',
+                    itemStyle: {
+                        // 指明颜色渐变的方向
+                        // 指明不同百分比之下颜色的值
+                        color: new this.$echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                            // 百分之0状态之下的颜色值
+                            {
+                                offset: 0,
+                                color: '#5052EE',
+                            },
+                            // 百分之100状态之下的颜色值
+                            {
+                                offset: 1,
+                                color: '#AB6EE5',
+                            },
+                        ]),
+                    },
+                }],
+            }
+            this.chartInstance.setOption(initOption)
             // 注册鼠标进入事件
             this.chartInstance.on('mouseover', () => {
                 clearInterval(this.timeId)
@@ -46,19 +77,14 @@ export default {
             const sellerName = showData.map(item => item.name)
             const sellerValue = showData.map(item => item.value)
             const option = {
-                title: { text: '在Vue中使用echarts' },
-                tooltip: {},
-                xAxis: {
+                yAxis: {
                     data: sellerName,
                 },
-                yAxis: {},
                 series: [{
-                    name: '销量',
-                    type: 'bar',
                     data: sellerValue,
                 }],
             }
-            this.chartInstance.setOption(option)
+            this.chartInstance.setOption(option) // 注意: 每次setOption 是整合不是覆盖
         },
         startInterval () {
             if (this.timeId) {
