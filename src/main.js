@@ -8,6 +8,9 @@ import store from './store'
 import '@/styles/index.less'
 import '@/assets/iconfont/iconfont'
 import '@/assets/iconfont/icon.css'
+
+import * as echarts from 'echarts'
+
 import {
     Button, Layout, Icon, Menu, Breadcrumb, Row, Col,
     FormModel, Input, Checkbox, message, Table, Divider,
@@ -32,6 +35,7 @@ Vue.use(Dropdown)
 Vue.use(Descriptions)
 Vue.prototype.$message = message
 
+Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 
 new Vue({
