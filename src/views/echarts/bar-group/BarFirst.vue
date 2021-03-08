@@ -86,6 +86,7 @@ export default {
             }
             this.chartInstance.setOption(option) // 注意: 每次setOption 是整合不是覆盖
         },
+        // 设置定时分页
         startInterval () {
             if (this.timeId) {
                 clearInterval(this.timeId)
@@ -98,10 +99,15 @@ export default {
                 this.updateChart()
             }, 2000)
         },
+        // 页面缩放时触发
+        screenAdapter () {
+            alert(this.$refs.myChart.offsetWidth)
+        },
     },
     mounted () {
         this.initChart()
         this.getData()
+        window.addEventListener('resize', this.screenAdapter)
     },
     destroyed () {
         clearInterval(this.timeId)
