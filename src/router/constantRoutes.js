@@ -46,6 +46,26 @@ const constantRoutes = [
             },
         ],
     },
+    {
+        path: '/eg',
+        component: BasicLayout,
+        redirect: '/eg',
+        meta: {
+            title: 'Example',
+            icon: '#icon-dashboard',
+        },
+        children: [
+            {
+                path: '/eg',
+                name: 'Example',
+                component: () => import('@/views/Example'),
+                meta: {
+                    title: 'Example',
+                    icon: '#icon-dashboard',
+                },
+            },
+        ],
+    },
 
     // {
     //     path: '*',

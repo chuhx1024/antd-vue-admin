@@ -10,6 +10,8 @@ import '@/assets/iconfont/iconfont'
 import '@/assets/iconfont/icon.css'
 
 import * as echarts from 'echarts'
+// 数据词典
+import dict from './components/Dict'
 
 import {
     Button, Layout, Icon, Menu, Breadcrumb, Row, Col,
@@ -43,6 +45,9 @@ if (process.env.NODE_ENV === 'development') {
     const { mockXHR } = require('../mock')
     mockXHR()
 }
+
+// 使用字典插件
+Vue.use(dict)
 
 new Vue({
     router,
