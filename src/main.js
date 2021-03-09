@@ -38,6 +38,12 @@ Vue.prototype.$message = message
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 
+// 使用mock 数据
+if (process.env.NODE_ENV === 'development') {
+    const { mockXHR } = require('../mock')
+    mockXHR()
+}
+
 new Vue({
     router,
     store,
