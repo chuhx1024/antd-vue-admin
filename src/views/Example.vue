@@ -52,8 +52,27 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
+    /*
+     * 组件/实例的选项应该有统一的顺序。
+     * 这是我们的组件选项默认顺序。
+     * 它们被划分为几大类，
+    */
+
+    // 全局感知
     name: 'Example',
+
+    // 字典模块引入
     dicts: ['dataStatus', 'featureClassify'],
+
+    // 模板依赖
+    components: { },
+    directives: { },
+    filters: { },
+
+    // 接口
+    props: { },
+
+    // 本地状态
     data () {
         return {
             CheckedClassify: [],
@@ -62,12 +81,27 @@ export default {
     computed: {
         ...mapState('app', ['sidebarCollapsed']),
     },
-    methods: {
-        ...mapActions('app', ['toggleSidbar']),
-    },
+
+    // 事件
+    watch: { },
+    // 生命周期钩子
+    beforeCreate () {},
+    created () {},
+    beforeMount () {},
     mounted () {
         // js 中使用 dict
         console.log(this.dict.dataStatus[0])
+    },
+    beforeUpdate () {},
+    updated () {},
+    activated () {},
+    deactivated () {},
+    beforeDestroy () {},
+    destroyed () {},
+
+    // 非响应式的 property
+    methods: {
+        ...mapActions('app', ['toggleSidbar']),
     },
 }
 </script>
