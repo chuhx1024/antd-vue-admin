@@ -108,5 +108,8 @@ export default {
 <style lang="less" scoped>
     .example-container {
         padding: 20px;
+        h3 {
+            color: @primary-color;
+        }
     }
 </style>
